@@ -33,3 +33,8 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+// build/libs/*-plain.jar 생성하지 않음
+tasks.getByName<Jar>("jar") {
+	enabled = false
+}
