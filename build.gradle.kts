@@ -27,6 +27,14 @@ allprojects {
 }
 
 subprojects {
+	apply(plugin = "org.springframework.boot")
+	apply(plugin = "io.spring.dependency-management")
+	apply(plugin = "java")
+	apply(plugin = "kotlin")
+	apply(plugin = "kotlin-kapt")
+	apply(plugin = "kotlin-jpa")
+	apply(plugin = "kotlin-spring")
+
 	the<io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension>().apply {
 		imports {
 			mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
