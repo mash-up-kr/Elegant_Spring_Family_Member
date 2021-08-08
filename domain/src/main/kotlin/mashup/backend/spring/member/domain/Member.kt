@@ -2,11 +2,17 @@ package mashup.backend.spring.member.domain
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
-class Member {
+@Table(name = "members")
+@EntityListeners(AuditingEntityListener::class)
+class Member(
+        @Embedded
+        val providerInfo: IdProviderInfo
+) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var memberId: Long? = null
