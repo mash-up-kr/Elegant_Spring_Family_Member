@@ -15,7 +15,7 @@ class Member(
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var memberId: Long? = null
+    val memberId: Long = 0
 
     var name: String? = null
     var nickname: String? = null
