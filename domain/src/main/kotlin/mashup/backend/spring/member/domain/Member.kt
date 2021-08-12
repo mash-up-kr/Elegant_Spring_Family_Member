@@ -10,6 +10,9 @@ import javax.persistence.*
 @Table(name = "members")
 @EntityListeners(AuditingEntityListener::class)
 class Member(
+        /**
+         * OAuth 인증 관련 정보
+         */
         @Embedded
         val providerInfo: IdProviderInfo
 ) {
@@ -21,16 +24,27 @@ class Member(
     var nickname: String? = null
     var email: String? = null
 
+    /**
+     * 생성 시각
+     */
     @CreatedDate
     lateinit var createdAt: LocalDateTime
 
+    /**
+     * 수정 시각
+     */
     @LastModifiedDate
     lateinit var updatedAt: LocalDateTime
 
+    /**
+     * 회원 상태
+     */
     @Enumerated(EnumType.STRING)
     var status: MemberStatus = MemberStatus.ACTIVE
 
-
+    /**
+     * 삭제 여부
+     */
     @Column(columnDefinition = "boolean default false")
     var deleted: Boolean = false
 }
