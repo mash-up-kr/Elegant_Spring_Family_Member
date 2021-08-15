@@ -4,6 +4,7 @@ HOME=/home/ubuntu
 API_DIR=${HOME}/apps/member-api
 BIN_DIR=${API_DIR}/bin
 LOG_DIR=${API_DIR}/logs
+SCOUTER_AGENT_DIR=${HOME}/apps/scouter/agent.java
 
 # check parameters and initialize JAR_FILE_PATH
 if [ "$#" -ne 1 ]; then
@@ -15,6 +16,10 @@ fi
 
 # move
 cd ${BIN_DIR}
+
+# SCOUTER
+JAVA_OPTS="${JAVA_OPTS} -javaagent:${SCOUTER_AGENT_DIR}/scouter.agent.jar"
+JAVA_OPTS="${JAVA_OPTS} -Dscouter.config=${SCOUTER_AGENT_DIR}/conf/scouter.conf"
 
 # REMOTE DEBUGGING
 JAVA_OPTS="${JAVA_OPTS} -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:5005"
