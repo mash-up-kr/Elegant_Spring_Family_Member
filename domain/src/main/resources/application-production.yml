@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://3.36.159.91:3306/member?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
+    username: spring
+    password: ENC(iff8gDZ+DD3jE5Ekm6WHp8fbilspPmYSuXe1jA2rRPRIjpjhlAVbEjsDk+B0Kbwj)
+  jpa:
+    hibernate:
+      ddl-auto: none
