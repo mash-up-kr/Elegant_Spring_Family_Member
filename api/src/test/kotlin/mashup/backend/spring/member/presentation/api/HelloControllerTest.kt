@@ -1,4 +1,4 @@
-package mashup.backend.spring.member
+package mashup.backend.spring.member.presentation.api
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
