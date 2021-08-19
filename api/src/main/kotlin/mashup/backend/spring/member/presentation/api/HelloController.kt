@@ -1,4 +1,4 @@
-package mashup.backend.spring.member
+package mashup.backend.spring.member.presentation.api
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
