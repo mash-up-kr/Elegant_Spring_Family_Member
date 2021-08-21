@@ -19,8 +19,6 @@ import javax.servlet.http.HttpSession
 class GitHubLoginController(
         @Value("\${oauth.github.client.id}")
         private val clientId: String,
-        @Value("\${oauth.github.client.secret}")
-        private val clientSecret: String,
         @Value("\${oauth.github.url.callback}")
         private val callbackUrl: String,
         private val loginService: LoginService
@@ -62,58 +60,9 @@ class GitHubLoginController(
         if (state != httpSession.getAttribute("state")) {
             throw RuntimeException("state 값이 일치하지 않음. queryParam.state: $state, session.state: $state")
         }
-        val accessToken = getAccessToken(code)
-        val githubUser = getUser(accessToken)
-        LoggerFactory.getLogger(this::class.java).info("githubUser: $githubUser")
-        loginService.loginWithGitHub(githubUser.id)
-        httpSession.setAttribute("nickname", githubUser.login)
+        val memberResponse = loginService.loginWithGitHub(code)
+        httpSession.setAttribute("nickname", memberResponse.name)
         return "redirect:/"
-    }
-
-    /**
-     * code 로 accessToken 조회
-     */
-    private fun getAccessToken(code: String): String {
-        try {
-            val responseDto = RestTemplate().postForObject(
-                    "https://github.com/login/oauth/access_token",
-                    GitHubAccessTokenRequest(
-                            clientId = clientId,
-                            clientSecret = clientSecret,
-                            code = code
-                    ),
-                    GitHubAccessTokenResponse::class.java
-            ) ?: throw RuntimeException("Failed to get accessToken")
-            LoggerFactory.getLogger(this::class.java).info("response: $responseDto")
-            return responseDto.accessToken
-        } catch (e: Exception) {
-            LoggerFactory.getLogger(this::class.java).error("github login error", e)
-            throw e
-        }
-    }
-
-    /**
-     * accessToken 으로 user 정보 조회
-     */
-    private fun getUser(accessToken: String): GitHubUserResponse {
-        try {
-            val httpHeaders = HttpHeaders()
-            httpHeaders["Authorization"] = "token $accessToken"
-            val httpEntity = HttpEntity<GitHubUserResponse>(httpHeaders)
-            val exchange = RestTemplate().exchange(
-                    "https://api.github.com/user",
-                    HttpMethod.GET,
-                    httpEntity,
-                    GitHubUserResponse::class.java
-            )
-            if (!exchange.statusCode.is2xxSuccessful) {
-                throw RuntimeException("Failed to get github user. statusCode: ${exchange.statusCode}")
-            }
-            return exchange.body!!
-        } catch (e: Exception) {
-            LoggerFactory.getLogger(this::class.java).error("github get user error", e)
-            throw e
-        }
     }
 }
 

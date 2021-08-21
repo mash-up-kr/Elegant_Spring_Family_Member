@@ -1,4 +1,4 @@
-package mashup.backend.spring.member.presentation.web.github
+package mashup.backend.spring.member.infrastructure.github
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

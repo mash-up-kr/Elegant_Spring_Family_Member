@@ -1,16 +1,29 @@
 package mashup.backend.spring.member.application
 
+import mashup.backend.spring.member.application.member.MemberAssembler
 import mashup.backend.spring.member.domain.IdProviderInfo
-import mashup.backend.spring.member.domain.IdProviderType
 import mashup.backend.spring.member.domain.MemberService
+import mashup.backend.spring.member.domain.oauth.OAuthAccessTokenService
+import mashup.backend.spring.member.domain.oauth.OAuthUserService
+import mashup.backend.spring.member.presentation.api.member.MemberResponse
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 
 @Service
 class LoginService(
-        private val memberService: MemberService
+        @Qualifier("gitHubAccessTokenService")
+        private val gitHubAccessTokenService: OAuthAccessTokenService,
+        @Qualifier("gitHubUserService")
+        private val gitHubUserService: OAuthUserService,
+        private val memberService: MemberService,
+        private val memberAssembler: MemberAssembler
 ) {
-    fun loginWithGitHub(githubUserId: String) {
-        memberService.getOrCreateMember(IdProviderInfo(IdProviderType.GITHUB, githubUserId))
-        // TODO: 신규 회원이면 닉네임 등 업데이트, 회원 정보 dto 리턴
+    fun loginWithGitHub(code: String): MemberResponse {
+        val oAuthAccessToken = gitHubAccessTokenService.getAccessToken(code)
+        val githubUser = gitHubUserService.getUser(oAuthAccessToken.accessToken)
+        LoggerFactory.getLogger(this::class.java).info("githubUser: $githubUser")
+        val member = memberService.getOrCreateMember(IdProviderInfo.github(githubUser.id))
+        return memberAssembler.toMemberResponse(member)
     }
 }
