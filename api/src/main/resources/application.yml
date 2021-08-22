@@ -1,16 +1,16 @@
-spring.profiles: local
+spring.config.activate.on-profile: local
 jwt:
   token-issuer: elegant-spring-member-local
   token-signing-key: ENC(48ETOHXvGqEUhmYWefuiN8VimeNuRE3XgYvO3SRBuCov0I8ssJ2/jzwcKwhxhvvR5X1p72l3RmfXVWRUs7Q//Q==)
 ---
 
-spring.profiles: develop
+spring.config.activate.on-profile: local
 jwt:
   token-issuer: elegant-spring-member-develop
   token-signing-key: ENC(48ETOHXvGqEUhmYWefuiN8VimeNuRE3XgYvO3SRBuCov0I8ssJ2/jzwcKwhxhvvR5X1p72l3RmfXVWRUs7Q//Q==)
 ---
 
-spring.profiles: production
+spring.config.activate.on-profile: local
 jwt:
   token-issuer: elegant-spring-member
   token-signing-key: ENC(xiCQdjf+i0bNGRBqUP3H+FvYf0p5nRbFyXhV9CmJ6i0fgwUDmGINP1iV3X12ERXTw46RajdZp6v1y8DRZ40GpA==)
