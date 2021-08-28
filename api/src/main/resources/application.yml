@@ -1,4 +1,3 @@
-spring.profiles: local
 oauth:
   github:
     client:
@@ -6,4 +5,22 @@ oauth:
       secret: ENC(W+rrxpl2Deybg5CLyXgPaiuaoD/EzZ75BX8s1jxS36agmQe2hM1ct8KQXYaO91HmV2c6LPHD887p2jpNWpZUktqAm3tih++/ceUezeokr+w=)
     url:
       callback: "http://localhost:8080/login/github/callback"
+---
+
+spring.profiles: local
+jwt:
+  token-issuer: elegant-spring-member-local
+  token-signing-key: ENC(48ETOHXvGqEUhmYWefuiN8VimeNuRE3XgYvO3SRBuCov0I8ssJ2/jzwcKwhxhvvR5X1p72l3RmfXVWRUs7Q//Q==)
+---
+
+spring.profiles: develop
+jwt:
+  token-issuer: elegant-spring-member-develop
+  token-signing-key: ENC(48ETOHXvGqEUhmYWefuiN8VimeNuRE3XgYvO3SRBuCov0I8ssJ2/jzwcKwhxhvvR5X1p72l3RmfXVWRUs7Q//Q==)
+---
+
+spring.profiles: production
+jwt:
+  token-issuer: elegant-spring-member
+  token-signing-key: ENC(xiCQdjf+i0bNGRBqUP3H+FvYf0p5nRbFyXhV9CmJ6i0fgwUDmGINP1iV3X12ERXTw46RajdZp6v1y8DRZ40GpA==)
 ---
