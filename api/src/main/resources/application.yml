@@ -1,3 +1,12 @@
+oauth:
+  github:
+    client:
+      id: 99d9578d4cfc36ba13f4
+      secret: ENC(W+rrxpl2Deybg5CLyXgPaiuaoD/EzZ75BX8s1jxS36agmQe2hM1ct8KQXYaO91HmV2c6LPHD887p2jpNWpZUktqAm3tih++/ceUezeokr+w=)
+    url:
+      callback: "http://localhost:8080/login/github/callback"
+---
+
 spring.profiles: local
 jwt:
   token-issuer: elegant-spring-member-local

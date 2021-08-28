@@ -15,4 +15,8 @@ data class IdProviderInfo(
          * 인증 제공자의 회원 식별자
          */
         val idProviderUserId: String
-)
+) {
+    companion object {
+        fun github(githubUserId: String) = IdProviderInfo(IdProviderType.GITHUB, githubUserId)
+    }
+}
