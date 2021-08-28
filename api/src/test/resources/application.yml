@@ -1,0 +1,15 @@
+jasypt:
+  encryptor:
+    password:
+
+oauth:
+  github:
+    client:
+      id:
+      secret:
+    url:
+      callback:
+
+jwt:
+  token-issuer:
+  token-signing-key:
