@@ -7,8 +7,7 @@ import javax.servlet.http.HttpServletRequest
 @ControllerAdvice
 class GlobalControllerAdvice {
     @ModelAttribute("memberId")
-    fun resolveMemberId(request: HttpServletRequest): Long {
+    fun resolveMemberId(request: HttpServletRequest): Long? {
         return request.getAttribute("memberId")?.let { it as Long }
-            ?: throw RuntimeException("'memberId' not found")
     }
 }
