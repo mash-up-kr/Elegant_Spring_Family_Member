@@ -2,6 +2,7 @@ package mashup.backend.spring.member.infrastructure.github
 
 import mashup.backend.spring.member.domain.oauth.OAuthUser
 import mashup.backend.spring.member.domain.oauth.OAuthUserService
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -37,8 +38,12 @@ class GitHubUserService : OAuthUserService {
                     details = emptyMap()
             )
         } catch (e: Exception) {
-            LoggerFactory.getLogger(this::class.java).error("github get user error", e)
+            log.error("github get user error", e)
             throw e
         }
+    }
+
+    companion object {
+        val log: Logger = LoggerFactory.getLogger(this::class.java)
     }
 }
