@@ -1,12 +1,14 @@
 package mashup.backend.spring.member.infrastructure.github
 
+import mashup.backend.spring.member.domain.IdProviderType
 import mashup.backend.spring.member.domain.oauth.OAuthAccessTokenService
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 
-@Service("gitHubAccessTokenService")
+@Service
 class GitHubAccessTokenService(
         @Value("\${oauth.github.client.id}")
         private val clientId: String,
@@ -27,11 +29,19 @@ class GitHubAccessTokenService(
                     ),
                     GitHubAccessTokenResponse::class.java
             ) ?: throw RuntimeException("Failed to get accessToken")
-            LoggerFactory.getLogger(this::class.java).info("response: $responseDto")
+            log.info("response: $responseDto")
             return GitHubAccessToken(responseDto.accessToken)
         } catch (e: Exception) {
-            LoggerFactory.getLogger(this::class.java).error("github login error", e)
+            log.error("github login error", e)
             throw e
         }
+    }
+
+    override fun supports(idProviderType: IdProviderType): Boolean {
+        return idProviderType == IdProviderType.GITHUB
+    }
+
+    companion object {
+        val log: Logger = LoggerFactory.getLogger(this::class.java)
     }
 }

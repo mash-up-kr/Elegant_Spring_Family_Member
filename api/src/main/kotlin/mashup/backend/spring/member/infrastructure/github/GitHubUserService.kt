@@ -1,7 +1,9 @@
 package mashup.backend.spring.member.infrastructure.github
 
+import mashup.backend.spring.member.domain.IdProviderType
 import mashup.backend.spring.member.domain.oauth.OAuthUser
 import mashup.backend.spring.member.domain.oauth.OAuthUserService
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -9,7 +11,7 @@ import org.springframework.http.HttpMethod
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 
-@Service("gitHubUserService")
+@Service
 class GitHubUserService : OAuthUserService {
     /**
      * accessToken 으로 GitHub user 정보 조회
@@ -37,8 +39,16 @@ class GitHubUserService : OAuthUserService {
                     details = emptyMap()
             )
         } catch (e: Exception) {
-            LoggerFactory.getLogger(this::class.java).error("github get user error", e)
+            log.error("github get user error", e)
             throw e
         }
+    }
+
+    override fun supports(idProviderType: IdProviderType): Boolean {
+        return idProviderType == IdProviderType.GITHUB
+    }
+
+    companion object {
+        val log: Logger = LoggerFactory.getLogger(this::class.java)
     }
 }
