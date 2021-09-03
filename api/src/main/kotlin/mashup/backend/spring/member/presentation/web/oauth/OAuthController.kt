@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
 
 @Controller
-abstract class OAuthController{
+abstract class OAuthLoginController{
     /**
      * OAuth 로그인 진입점
      */
