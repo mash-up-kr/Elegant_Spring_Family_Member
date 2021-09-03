@@ -9,6 +9,13 @@ oauth:
       secret:
     url:
       callback:
+  naver:
+    client:
+      id:
+      secret:
+    url:
+      callback:
+
 
 jwt:
   token-issuer:
