@@ -28,8 +28,6 @@ allprojects {
 }
 
 subprojects {
-	val loggerVer = "2.0.4"
-
 	apply(plugin = "org.springframework.boot")
 	apply(plugin = "io.spring.dependency-management")
 	apply(plugin = "java")
@@ -52,7 +50,6 @@ subprojects {
 		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
 		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-		implementation("io.github.microutils:kotlin-logging:$loggerVer")
 		testImplementation("org.springframework.boot:spring-boot-starter-test") {
 			exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 		}

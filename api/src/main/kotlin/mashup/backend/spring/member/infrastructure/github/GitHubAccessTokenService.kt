@@ -18,7 +18,7 @@ class GitHubAccessTokenService(
     /**
      * code 로 AccessToken 조회
      */
-    override fun getAccessToken(code: String): GitHubAccessToken {
+    override fun getAccessToken(code: String, state: String?): GitHubAccessToken {
         try {
             val responseDto = RestTemplate().postForObject(
                     "https://github.com/login/oauth/access_token",

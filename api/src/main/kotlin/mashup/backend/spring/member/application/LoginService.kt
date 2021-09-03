@@ -19,11 +19,18 @@ class LoginService(
         private val memberAssembler: MemberAssembler
 ) {
     fun loginWithGitHub(code: String): MemberResponse {
-        val github = IdProviderType.GITHUB
-        val oAuthAccessToken = oAuthAccessTokenServiceFactory.get(github).getAccessToken(code)
-        val githubUser = oAuthUserServiceFactory.get(github).getUser(oAuthAccessToken.accessToken)
-        log.info("githubUser: $githubUser")
-        val member = memberService.getOrCreateMember(IdProviderInfo.github(githubUser.id))
+        return loginWithOAuth(code, null, IdProviderType.GITHUB)
+    }
+
+    fun loginWithNaver(code: String, state: String): MemberResponse {
+        return loginWithOAuth(code, state, IdProviderType.NAVER)
+    }
+
+    private fun loginWithOAuth(code: String, state: String?, idProviderType: IdProviderType): MemberResponse {
+        val oAuthAccessToken = oAuthAccessTokenServiceFactory.get(idProviderType).getAccessToken(code, state)
+        val user = oAuthUserServiceFactory.get(idProviderType).getUser(oAuthAccessToken.accessToken)
+        log.info("${idProviderType}_USER : $user")
+        val member = memberService.getOrCreateMember(IdProviderInfo(idProviderType, user.id))
         return memberAssembler.toMemberResponse(member)
     }
 
@@ -31,3 +38,4 @@ class LoginService(
         val log: Logger = LoggerFactory.getLogger(this::class.java)
     }
 }
+
