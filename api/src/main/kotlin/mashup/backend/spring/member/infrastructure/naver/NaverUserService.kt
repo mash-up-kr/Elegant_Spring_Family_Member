@@ -28,8 +28,6 @@ class NaverUserService : OAuthUserService {
                 throw RuntimeException("Failed to get naver user. statusCode: ${exchange.statusCode}")
             }
             val naverUserResponse = exchange.body!!
-            println(exchange.body)
-            println(naverUserResponse)
 
             return NaverUser(
                     id = naverUserResponse.response.id,

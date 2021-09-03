@@ -6,11 +6,11 @@ oauth:
     url:
       callback: "http://localhost:8080/login/github/callback"
   naver:
-      client:
-        id: BtRa506XuSJsPzHrqGhJ
-        secret: ENC(gJSuFDEX6uvvmfxjcWyS8/3urmFfXRgqrqeef4p9ez6BgDkIXn4yAIgYAUNz4nzF)
-      url:
-        callback: "http://localhost:8080/login/naver/callback"
+    client:
+      id: BtRa506XuSJsPzHrqGhJ
+      secret: ENC(gJSuFDEX6uvvmfxjcWyS8/3urmFfXRgqrqeef4p9ez6BgDkIXn4yAIgYAUNz4nzF)
+    url:
+      callback: "http://localhost:8080/login/naver/callback"
 ---
 
 spring.config.activate.on-profile: local

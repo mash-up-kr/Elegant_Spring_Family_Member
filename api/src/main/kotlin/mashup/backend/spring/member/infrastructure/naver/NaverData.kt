@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import mashup.backend.spring.member.domain.oauth.OAuthAccessToken
 import mashup.backend.spring.member.domain.oauth.OAuthUser
 
-// reponse
+// response
 
 data class NaverAccessTokenResponse(
         @JsonProperty("access_token")
@@ -17,7 +17,9 @@ data class NaverAccessTokenResponse(
         val expiresIn: String
 )
 
-/* naver user response
+/*
+naver user response example
+---
 {
   "resultcode": "00",
   "message": "success",
@@ -32,15 +34,17 @@ data class NaverAccessTokenResponse(
     "birthday": "10-01"
   }
 }
+---
  */
 data class NaverUserResponse(
         val message: String,
         val resultcode: String,
-        val response: Response
+        @JsonProperty("response")
+        val response: NaverUserDetailResponse
 )
-data class Response(
+data class NaverUserDetailResponse(
         @JsonProperty("profile_image")
-        val profileImage: String?, // "https://avatars.githubusercontent.com/u/88278320?v=4"
+        val profileImage: String?,
         val email: String,
         val id: String,
         val name: String,
