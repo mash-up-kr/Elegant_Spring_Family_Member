@@ -1,4 +1,4 @@
-package mashup.backend.spring.member.presentation.web.github
+package mashup.backend.spring.member.presentation.web.naver
 
 import mashup.backend.spring.member.application.LoginService
 import mashup.backend.spring.member.presentation.api.member.MemberResponse
@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.util.UriComponentsBuilder
 
 @Controller
-@RequestMapping("login/github")
-class GitHubLoginController(
-        @Value("\${oauth.github.client.id}")
+@RequestMapping("login/naver")
+class NaverLoginController(
+        @Value("\${oauth.naver.client.id}")
         private val clientId: String,
-        @Value("\${oauth.github.url.callback}")
+        @Value("\${oauth.naver.url.callback}")
         private val callbackUrl: String,
         private val loginService: LoginService
-) : OAuthLoginController()  {
+) : OAuthLoginController() {
     override fun createOAuthUrl(state: String): String {
-        return UriComponentsBuilder.fromHttpUrl("https://github.com/login/oauth/authorize")
+        return UriComponentsBuilder.fromHttpUrl("https://nid.naver.com/oauth2.0/authorize")
                 .queryParam("client_id", clientId)
                 .queryParam("redirect_uri", callbackUrl)
                 .queryParam("state", state)
+                .queryParam("response_type", "code")
                 .build()
                 .toUriString()
     }
 
     override fun loginCallbackWithOAuth(code: String, state: String): MemberResponse {
-        return loginService.loginWithGitHub(code)
+        return loginService.loginWithNaver(code, state)
     }
 }
-
