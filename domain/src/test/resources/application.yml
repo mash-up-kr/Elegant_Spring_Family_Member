@@ -1,7 +1,3 @@
-jasypt:
-  encryptor:
-    password: # inject from environment variable
-
 spring:
   rabbitmq:
     host: b-708a3dff-a404-4fa8-8285-794c9180fcea.mq.ap-northeast-2.amazonaws.com
@@ -13,3 +9,7 @@ spring:
     listener:
       simple:
         acknowledge-mode: manual
+
+jasypt:
+  encryptor:
+    password: # inject from environment variable
