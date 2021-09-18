@@ -2,10 +2,10 @@ dependencies {
     runtimeOnly("mysql:mysql-connector-java")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     api("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation('org.springframework.boot:spring-boot-starter-amqp')
+    implementation("org.springframework.boot:spring-boot-starter-amqp")
     implementation("com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3")
     testRuntimeOnly("com.h2database:h2")
-    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+    testImplementation("org.springframework.amqp:spring-rabbit-test")
 }
 
 bootJar {
