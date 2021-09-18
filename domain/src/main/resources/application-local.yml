@@ -6,3 +6,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  rabbitmq:
+    host: b-708a3dff-a404-4fa8-8285-794c9180fcea.mq.ap-northeast-2.amazonaws.com
+    port: 5671
+    username: member
+    password: ENC(yHVJNvwjSH3pzvNvtf1ZgUrn+EsAcjPJOc7tUMAkPMmiSMgo9PXR4ZapTshSq+0D)
+    ssl:
+      enabled: true
+    listener:
+      simple:
+        acknowledge-mode: manual
